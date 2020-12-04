@@ -29,7 +29,12 @@ def _signal_from_indices(indices, desired_length=None, value=1):
     Used in *_findpeaks to transform vectors of peak indices to signal.
 
     """
-    signal = np.zeros(desired_length, dtype=np.int)
+    if isinstance(value, np.ndarray):
+        dtype = value.dtype
+    else:
+        dtype = np.int
+        
+    signal = np.zeros(desired_length, dtype=dtype)
 
     if isinstance(indices, list) and (not indices):    # skip empty lists
         return signal
