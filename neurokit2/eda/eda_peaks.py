@@ -156,7 +156,10 @@ def _eda_peaks_getfeatures(info, eda_phasic, sampling_rate=1000, recovery_percen
 
         # Adjust segment (cut when it reaches minimum to avoid picking out values on the rise of the next peak)
         segment = segment[0 : np.argmin(segment)]
-
+        
+        if len(segment) == 0:
+            continue
+            
         # Find recovery time
         recovery_value = find_closest(recovery_values[i], segment, direction="smaller", strictly=False)
 
